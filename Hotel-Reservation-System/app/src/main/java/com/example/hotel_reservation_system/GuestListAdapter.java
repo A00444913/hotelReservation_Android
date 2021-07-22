@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
@@ -36,7 +38,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
     Context context;
     View rootView;
     Button submitButton,nextButton;
-    TextView tempConfirmationNoTextView;
+    TextView tempConfirmationNoTextView,confirmationHintTextView;
 
 
     ArrayList<GuestData> guestsListData = new ArrayList<>();
@@ -66,6 +68,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
         submitButton = rootView.findViewById(R.id.guests_information_submit_button);
         nextButton = rootView.findViewById(R.id.guests_information_next_button);
         tempConfirmationNoTextView = rootView.findViewById(R.id.temp_confirmation_number_text_view);
+        confirmationHintTextView = rootView.findViewById(R.id.confirmation_hint_text_view);
 
         return new ViewHolder(view);
     }
@@ -213,6 +216,10 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
                         confirmation_id = confirmation.getConfirmation_number();
                         Log.d("Confirmation number:",confirmation_id);
                         tempConfirmationNoTextView.setText(confirmation_id);
+                        String confirm = "Your information has been submitted successfully, please hit NEXT button to get your confirmation number :)";
+                        //Toast.makeText(context.getApplicationContext(), confirm,Toast.LENGTH_LONG).setGravity(Gravity.CENTER,0,0).show();
+                        confirmationHintTextView.setVisibility(View.VISIBLE);
+                        confirmationHintTextView.setText(confirm);
                     }
 
                     @Override

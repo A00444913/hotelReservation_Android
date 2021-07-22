@@ -39,10 +39,17 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.View
         String hotelName = hotelListData.get(position).getHotel_name();
         String hotelPrice = hotelListData.get(position).getPrice();
         String hotelAvailability = hotelListData.get(position).getAvailability();
+        String availability = "";
+        if (hotelAvailability == "true"){
+            availability = "AVAILABLE";
+        }
+        else{
+            availability = "NOT AVAILABLE NOW";
+        }
 
         // set up the text
         holder.hotelName.setText(hotelName);
-        holder.hotelAvailability.setText(hotelAvailability);
+        holder.hotelAvailability.setText(availability);
         holder.hotelPrice.setText(hotelPrice);
     }
 

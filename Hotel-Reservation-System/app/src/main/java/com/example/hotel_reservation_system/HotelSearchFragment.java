@@ -3,6 +3,7 @@ package com.example.hotel_reservation_system;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import java.util.Calendar;
 
 public class HotelSearchFragment extends Fragment {
 
-    // These are the global variables
+    // global variables
     View view;
     ConstraintLayout mainLayout;
     TextView titleTextView, searchTextConfirmationTextView;
@@ -67,8 +68,6 @@ public class HotelSearchFragment extends Fragment {
         checkInDatePicker = view.findViewById(R.id.checkin_date_picker_view);
         checkOutDatePicker = view.findViewById(R.id.checkout_date_picker_view);
 
-        //set Title Text
-        titleTextView.setText(R.string.welcome_text);
 
         //Set up the text of confirm text box
         checkButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +89,7 @@ public class HotelSearchFragment extends Fragment {
 
 
 
-                searchTextConfirmationTextView.setText("Dear Customer, Your check in date is " + checkInDate + ", " +
+                searchTextConfirmationTextView.setText("Dear "+guestName+", Your check in date is " + checkInDate + ", " +
                         "your checkout date is " + checkOutDate + ".The number of guests are " + numberOfGuests);
             }
         });

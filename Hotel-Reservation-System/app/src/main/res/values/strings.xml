@@ -6,5 +6,9 @@
     <string name="submit_button">SUBMIT</string>
     <string name="name_edit">Name of This Guest</string>
     <string name="age_edit">Age of This Guest</string>
+    <string name="guestNumber_text">Number of Guests</string>
+    <string name="guestName_text">Enter Your Name</string>
+    <string name="checkIn_text">Check In Date :</string>
+    <string name="checkOut_text">Check Out Date :</string>
 
 </resources>

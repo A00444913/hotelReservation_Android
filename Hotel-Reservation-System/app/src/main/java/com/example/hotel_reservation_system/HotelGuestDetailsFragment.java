@@ -22,7 +22,7 @@ public class HotelGuestDetailsFragment extends Fragment {
 
     View view;
     Button submitButton, nextButton;
-    TextView tempConfirmationNoTextView;
+    TextView tempConfirmationNoTextView,hotelNameTextView,checkInDateTextView,checkOutDateTextView,priceTextView;
     //String numberOfGuest = getArguments().getString("number of guests");
 
     @Override
@@ -37,20 +37,27 @@ public class HotelGuestDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView hotelRecapTextView = view.findViewById(R.id.hotel_recap_text_view);
+        //TextView hotelRecapTextView = view.findViewById(R.id.hotel_recap_text_view);
+        hotelNameTextView = view.findViewById(R.id.choosen_hotel_name_text_view2);
+        checkInDateTextView = view.findViewById(R.id.choosen_check_in_text_view2);
+        checkOutDateTextView = view.findViewById(R.id.choosen_check_out_text_view2);
+        priceTextView = view.findViewById(R.id.choosen_price_text_view2);
         submitButton = view.findViewById(R.id.guests_information_submit_button);
         nextButton = view.findViewById(R.id.guests_information_next_button);
         tempConfirmationNoTextView = view.findViewById(R.id.temp_confirmation_number_text_view);
 
         String hotelName = getArguments().getString("hotel name");
-        String hotelPrice = getArguments().getString("hotel price");
+        String hotelPrice = "$"+getArguments().getString("hotel price");
         String hotelAvailability = getArguments().getString("hotel availability");
         String checkInDate = getArguments().getString("check in date");
         String checkOutDate = getArguments().getString("check out date");
         String numberOfGuest = getArguments().getString("number of guests");
 
-
-        hotelRecapTextView.setText("You have selected " +hotelName+ ". The cost will be $ "+hotelPrice+ " and availability is " +hotelAvailability+". The number of Guests are "+numberOfGuest);
+        hotelNameTextView.setText(hotelName);
+        checkInDateTextView.setText(checkInDate);
+        checkOutDateTextView.setText(checkOutDate);
+        priceTextView.setText(hotelPrice);
+        //hotelRecapTextView.setText("You have selected " +hotelName+ ". The cost will be $ "+hotelPrice+ " and availability is " +hotelAvailability+". The number of Guests are "+numberOfGuest);
 
         ArrayList<Integer> list = new ArrayList<>();
         for(int i=0; i < Integer.valueOf(numberOfGuest); i++)
