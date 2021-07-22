@@ -8,7 +8,7 @@ public class Api {
 
         // change your base URL
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://jinting.us-east-1.elasticbeanstalk.com/") //Set the Root URL
+                .setEndpoint("http://jinting.us-east-1.elasticbeanstalk.com/")//Set the Root URL
                 .build(); //Finally building the adapter
 
         //Creating object for our interface

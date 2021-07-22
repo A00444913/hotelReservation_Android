@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guest_segment_view"
             android:layout_marginTop="5dp"
             tool:text="Guest 1"
             android:textSize="20sp"
@@ -92,17 +92,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/guest_gender_text_view">
 
             <RadioButton
-                android:id="@+id/guest_gender_female_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="FEMALE" />
-
-            <RadioButton
                 android:id="@+id/guest_gender_male_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="MALE" />
+
+            <RadioButton
+                android:id="@+id/guest_gender_female_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FEMALE" />
 
             <RadioButton
                 android:id="@+id/guest_gender_unknown_radio"
@@ -120,9 +120,10 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:background="#aa000000"
-            app:layout_constraintTop_toBottomOf="@+id/guest_genderradio_group"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

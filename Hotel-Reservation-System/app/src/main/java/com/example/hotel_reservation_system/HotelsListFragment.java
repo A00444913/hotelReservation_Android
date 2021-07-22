@@ -54,29 +54,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
         headingTextView.setText("Welcome user, displaying hotel for " + numberOfGuests + " guests staying from " + checkInDate +
                 " to " + checkOutDate);
 
-
-        // Set up the RecyclerView
-//        ArrayList<HotelListData> hotelListData = initHotelListData();
-//        RecyclerView recyclerView = view.findViewById(R.id.hotel_list_recyclerView);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        HotelListAdapter hotelListAdapter = new HotelListAdapter(getActivity(), hotelListData);
-//        recyclerView.setAdapter(hotelListAdapter);
         getHotelsListsData();
-    }
-
-    public ArrayList<HotelListData> initHotelListData() {
-        ArrayList<HotelListData> list = new ArrayList<>();
-
-        list.add(new HotelListData("Halifax Regional Hotel", "2000$", "true"));
-        list.add(new HotelListData("Hotel Pearl", "500$", "false"));
-        list.add(new HotelListData("Hotel Amano", "800$", "true"));
-        list.add(new HotelListData("San Jones", "250$", "false"));
-        list.add(new HotelListData("Halifax Regional Hotel", "2000$", "true"));
-        list.add(new HotelListData("Hotel Pearl", "500$", "false"));
-        list.add(new HotelListData("Hotel Amano", "800$", "true"));
-        list.add(new HotelListData("San Jones", "250$", "false"));
-
-        return list;
     }
 
     private void getHotelsListsData() {

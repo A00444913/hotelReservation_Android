@@ -50,15 +50,17 @@ public class HotelGuestDetailsFragment extends Fragment {
             list.add(i);
         }
 
-//        for(int i = 0; i < Integer.valueOf(numberOfGuest).intValue();i++){
-//            guestListData.add(new GuestListData("test",25,1));
-//        }
+        ArrayList<HotelData> hotelData = new ArrayList<>();
+        for(int i=0; i< Integer.valueOf(numberOfGuest);i++)
+        {
+            hotelData.add(new HotelData(hotelName,checkInDate,checkOutDate));
+        }
 
         // Set up the RecyclerView
         //ArrayList<HotelListData> hotelListData = initHotelListData();
         RecyclerView recyclerView = view.findViewById(R.id.guest_list_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        GuestListAdapter guestListAdapter = new GuestListAdapter(getActivity(),list);
+        GuestListAdapter guestListAdapter = new GuestListAdapter(getActivity(),hotelData);
         recyclerView.setAdapter(guestListAdapter);
 
 
@@ -74,14 +76,4 @@ public class HotelGuestDetailsFragment extends Fragment {
 //
 //        return list;
 //    }
-
-    public ArrayList<GuestListData> initGuestListData2() {
-        ArrayList<GuestListData> list = new ArrayList<>();
-
-        list.add(new GuestListData("test",25,1));
-        list.add(new GuestListData("test",25,1));
-        list.add(new GuestListData("test",25,1));
-
-        return list;
-    }
 }
