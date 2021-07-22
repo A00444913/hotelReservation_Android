@@ -19,9 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+//import retrofit.Callback;
+//import retrofit.RetrofitError;
+//import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HotelsListFragment extends Fragment implements ItemClickListener {
 
@@ -59,21 +62,42 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
 
     private void getHotelsListsData() {
         progressBar.setVisibility(View.VISIBLE);
-        Api.getClient().getHotelsLists(new Callback<List<HotelListData>>() {
+//        Api.getClient().getHotelsLists(new Callback<List<HotelListData>>() {
+//            @Override
+//            public void success(List<HotelListData> userListResponses, Response response) {
+//                // in this method we will get the response from API
+//                userListResponseData = userListResponses;
+//
+//
+//                // Set up the RecyclerView
+//                setupRecyclerView();
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                // if error occurs in network transaction then we can get the error in this method.
+//                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
+
+        Api.getClient().getHotelsLists().enqueue(new Callback<List<HotelListData>>() {
             @Override
-            public void success(List<HotelListData> userListResponses, Response response) {
+            public void onResponse(Call<List<HotelListData>> call, Response<List<HotelListData>> response) {
                 // in this method we will get the response from API
+                List<HotelListData> userListResponses = response.body();
                 userListResponseData = userListResponses;
 
 
                 // Set up the RecyclerView
                 setupRecyclerView();
+
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void onFailure(Call<List<HotelListData>> call, Throwable t) {
                 // if error occurs in network transaction then we can get the error in this method.
-                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
 
             }
         });

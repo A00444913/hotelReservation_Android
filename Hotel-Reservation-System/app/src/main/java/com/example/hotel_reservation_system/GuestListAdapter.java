@@ -2,6 +2,7 @@ package com.example.hotel_reservation_system;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,12 +16,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.ViewHolder> {
 
@@ -29,13 +35,16 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
     private LayoutInflater layoutInflater;
     Context context;
     View rootView;
-    Button submitButton;
+    Button submitButton,nextButton;
+    TextView tempConfirmationNoTextView;
 
 
     ArrayList<GuestData> guestsListData = new ArrayList<>();
     ArrayList<String> guestsName = new ArrayList<String>();
     ArrayList<String> guestsAge = new ArrayList<String>();
     ArrayList<String> guestsGender = new ArrayList<String>();
+
+    String confirmation_id;
 
 
 
@@ -44,7 +53,6 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
 
     GuestListAdapter(Context context, List<HotelData> hotelData) {
         this.layoutInflater = LayoutInflater.from(context);
-        //this.guestNumber = guestNumber;
         this.hotelData = hotelData;
     }
 
@@ -55,8 +63,9 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
 
         context = parent.getContext();
         rootView = ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
-        //submitButton = (Button)rootView.findViewById(R.id.guests_information_submit_button);
         submitButton = rootView.findViewById(R.id.guests_information_submit_button);
+        nextButton = rootView.findViewById(R.id.guests_information_next_button);
+        tempConfirmationNoTextView = rootView.findViewById(R.id.temp_confirmation_number_text_view);
 
         return new ViewHolder(view);
     }
@@ -64,7 +73,6 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull GuestListAdapter.ViewHolder holder, int position) {
 
-        //int id = hotelData.get(position);
         int id = position;
         String guestPosition = String.valueOf(position+1);
 
@@ -181,6 +189,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
                 String hotel_name = hotelData.get(0).getHotel_name();
                 String checkin = hotelData.get(0).getCheckin();
                 String checkout = hotelData.get(0).getCheckout();
+                //String confirmation_id;
                 HotelData postHotelData = new HotelData(hotel_name,checkin,checkout);
                 for(int i=0; i< hotelData.size();i++){
                     String guest_name = guestsName.get(i);
@@ -197,6 +206,24 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
 //                Api.getClient().getConfirmation(postHotelData){
 //                    Confirmation confirmation = response.body();
 //                }
+                Api.getClient().postReservaInfo(postHotelData).enqueue(new Callback<Confirmation>() {
+                    @Override
+                    public void onResponse(Call<Confirmation> call, Response<Confirmation> response) {
+                        Confirmation confirmation = response.body();
+                        confirmation_id = confirmation.getConfirmation_number();
+                        Log.d("Confirmation number:",confirmation_id);
+                        tempConfirmationNoTextView.setText(confirmation_id);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Confirmation> call, Throwable t) {
+
+                    }
+                });
+
+                //progressBar.setVisibility(View.GONE);
+                submitButton.setVisibility(View.GONE);
+                nextButton.setVisibility(View.VISIBLE);
 
             }
         });

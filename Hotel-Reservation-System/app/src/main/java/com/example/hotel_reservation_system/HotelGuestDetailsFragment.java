@@ -1,14 +1,17 @@
 package com.example.hotel_reservation_system;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +21,8 @@ import java.util.List;
 public class HotelGuestDetailsFragment extends Fragment {
 
     View view;
+    Button submitButton, nextButton;
+    TextView tempConfirmationNoTextView;
     //String numberOfGuest = getArguments().getString("number of guests");
 
     @Override
@@ -33,6 +38,9 @@ public class HotelGuestDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView hotelRecapTextView = view.findViewById(R.id.hotel_recap_text_view);
+        submitButton = view.findViewById(R.id.guests_information_submit_button);
+        nextButton = view.findViewById(R.id.guests_information_next_button);
+        tempConfirmationNoTextView = view.findViewById(R.id.temp_confirmation_number_text_view);
 
         String hotelName = getArguments().getString("hotel name");
         String hotelPrice = getArguments().getString("hotel price");
@@ -63,17 +71,34 @@ public class HotelGuestDetailsFragment extends Fragment {
         GuestListAdapter guestListAdapter = new GuestListAdapter(getActivity(),hotelData);
         recyclerView.setAdapter(guestListAdapter);
 
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String confirmation_number = tempConfirmationNoTextView.getText().toString();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("hotel name", hotelName);
+                bundle.putString("confirmation number", confirmation_number);
+
+                HotelGuestDetailsFragment hotelGuestDetailsFragment = new HotelGuestDetailsFragment();
+                hotelGuestDetailsFragment.setArguments(bundle);
+
+                ConfirmationFragment confirmationFragment = new ConfirmationFragment();
+                confirmationFragment.setArguments(bundle);
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_layout,confirmationFragment);
+                fragmentTransaction.remove(HotelGuestDetailsFragment.this);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                Log.d("msg ","You need to transfer to confirmation page!!!");
+            }
+        });
+
 
     }
 
-//    public ArrayList<Integer> initGuestListData() {
-//        ArrayList<Integer> list = new ArrayList<>();
-//
-//        for(int i=0; i < Integer.valueOf(numberOfGuest); i++)
-//        {
-//            list.add(i);
-//        }
-//
-//        return list;
-//    }
+
+
+
 }

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
+//import retrofit.Callback;
 
 public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.ViewHolder> {
 
