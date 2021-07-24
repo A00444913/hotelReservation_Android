@@ -10,12 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 
-//import retrofit.Callback;
-//import retrofit.http.Body;
-//import retrofit.http.GET;
-//import retrofit.http.Headers;
-//import retrofit.http.POST;
-//import retrofit.http.Query;
 
 public interface ApiInterface {
 

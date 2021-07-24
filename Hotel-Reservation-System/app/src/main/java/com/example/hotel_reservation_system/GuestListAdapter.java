@@ -165,8 +165,6 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
         holder.guestGenderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int selectId = group.getCheckedRadioButtonId();
-                //selectId = (selectId % 3);
                 try{
                     for(int i=0; i<=id; i++){
                         if(holder.unknownButton.getId() == checkedId){
